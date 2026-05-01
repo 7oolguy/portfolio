@@ -1,5 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 0. Initialize Lenis Smooth Scroll
+    // 0. Preloader Terminal Logic
+    const loader = document.getElementById('loader');
+    const terminalLines = document.getElementById('terminal-lines');
+    const asciiContainer = document.getElementById('ascii-container');
+    
+    const bootLines = [
+        "> INITIALIZING KERNEL...",
+        "> LOADING SYSTEMS MODULES... <span class='success'>DONE</span>",
+        "> CHECKING SECURITY PROTOCOLS... <span class='success'>SAFE</span>",
+        "> ESTABLISHING MULTI-TENANT HANDSHAKE... <span class='success'>READY</span>",
+        "> MOUNTING DATA ARCHITECTURE... <span class='success'>SUCCESS</span>",
+        "> SYNCING REPOS... <span class='success'>COMPLETE</span>",
+        "> LAUNCHING <span class='command'>YAN_OS_v1.0.4</span>..."
+    ];
+
+    let lineIndex = 0;
+    const typeLine = () => {
+        if (lineIndex < bootLines.length) {
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.innerHTML = bootLines[lineIndex];
+            terminalLines.appendChild(line);
+            lineIndex++;
+            setTimeout(typeLine, Math.random() * 200 + 100);
+        } else {
+            // Show ASCII
+            setTimeout(() => {
+                terminalLines.style.display = 'none';
+                asciiContainer.style.display = 'block';
+                
+                // Final Exit
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        lenis.start(); // Start scroll only after boot
+                    }, 800);
+                }, 1500);
+            }, 500);
+        }
+    };
+
+    // Initialize Lenis but keep it stopped
     const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -11,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
         touchMultiplier: 2,
         infinite: false,
     })
+
+    lenis.stop(); // Stop scroll initially
+    typeLine(); // Start boot sequence
 
     function raf(time) {
         lenis.raf(time)

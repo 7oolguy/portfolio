@@ -30,6 +30,81 @@ html {
     background-color: var(--bg-color);
 }
 
+/* Preloader Terminal */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00ff41; /* Classic Terminal Green */
+    font-family: var(--font-mono);
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.loader::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+.terminal-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+.terminal-line {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.terminal-line span.success { color: #00ff41; font-weight: bold; }
+.terminal-line span.command { color: #fff; }
+
+.glitch-wrapper {
+    margin-top: 3rem;
+    display: none;
+    text-align: center;
+}
+
+.ascii-art {
+    font-size: 0.6rem;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    animation: glitch-text 0.2s infinite;
+}
+
+@keyframes glitch-text {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.os-name {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    opacity: 0.5;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
