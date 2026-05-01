@@ -30,6 +30,31 @@ html {
     background-color: var(--bg-color);
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Custom Selection */
+::selection {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
 html.lenis, html.lenis body {
   height: auto;
 }
