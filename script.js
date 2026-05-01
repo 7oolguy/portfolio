@@ -63,12 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
             terminalLines.appendChild(line);
             logIndex++;
             
-            // Auto-scroll to bottom
-            window.scrollTo(0, document.body.scrollHeight);
+            // Auto-scroll the loader element to bottom
+            loader.scrollTo(0, loader.scrollHeight);
             
             // Vary speed for realism
             let delay = Math.random() * 80 + 20;
-            if (logIndex > 25) delay = Math.random() * 40 + 10; // Speed up mid-way
+            if (logIndex > 20) delay = Math.random() * 40 + 5; // Speed up mid-way
             
             setTimeout(typeLogs, delay);
         } else {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     lenis.stop(); // Stop scroll initially
-    typeLine(); // Start boot sequence
+    typeLogs(); // Start boot sequence (FIXED: was typeLine)
 
     function raf(time) {
         lenis.raf(time)
