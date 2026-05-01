@@ -791,6 +791,8 @@ body.dark-mode .modal {
     border: 1px solid var(--border-color);
     transform: translateY(20px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .modal.active .modal-content {

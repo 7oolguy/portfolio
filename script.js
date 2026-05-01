@@ -320,13 +320,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('active'), 10);
+            body.style.overflow = 'hidden';
             lenis.stop(); // Stop scrolling
         });
     });
 
     const closeModal = () => {
         modal.classList.remove('active');
-        setTimeout(() => modal.style.display = 'none', 300);
+        setTimeout(() => {
+            modal.style.display = 'none';
+            body.style.overflow = '';
+        }, 300);
         lenis.start(); // Start scrolling
     };
 
