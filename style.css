@@ -74,40 +74,41 @@ html {
 /* Mini Terminal Notifications */
 .terminal-notifications {
     position: fixed;
-    top: 6rem; /* Below nav */
+    top: 5.5rem;
     left: 2rem;
     z-index: 999;
     pointer-events: none;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.2rem;
 }
 
 .notification-line {
-    background: rgba(0, 0, 0, 0.7);
-    color: var(--accent-color);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    padding: 0.4rem 0.8rem;
-    border-left: 2px solid var(--accent-color);
+    font-size: 0.6rem;
+    padding: 0.2rem 0;
     opacity: 0;
-    transform: translateX(-20px);
-    animation: notify-in 0.3s ease forwards, notify-out 0.3s ease 2.5s forwards;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    transform: translateY(10px);
+    animation: notify-in 0.2s ease-out forwards, notify-out 0.2s ease-in 2.2s forwards;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-body.dark-mode .notification-line {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(5px);
+.notification-line::before {
+    content: ">";
+    color: var(--accent-color);
+    font-weight: bold;
 }
 
 @keyframes notify-in {
-    to { opacity: 1; transform: translateX(0); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes notify-out {
-    to { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 0; transform: translateY(-10px); }
 }
 
 /* Custom Scrollbar */
