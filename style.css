@@ -37,29 +37,15 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: var(--bg-color); /* Match Theme */
     z-index: 10000;
     display: flex;
-    justify-content: flex-start; /* Align to top-left */
-    align-items: flex-start;    /* Align to top-left */
-    color: #fff; /* Black and White */
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: var(--text-primary);
     font-family: var(--font-mono);
-    padding: 3rem;
+    padding: 2rem;
     overflow: hidden;
-}
-
-.loader::after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-    z-index: 2;
-    background-size: 100% 2px;
-    pointer-events: none;
 }
 
 .terminal-content {
@@ -68,43 +54,19 @@ html {
 }
 
 .terminal-line {
-    margin-bottom: 0.3rem;
-    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
     opacity: 0.9;
-    letter-spacing: 1px;
+    font-weight: 400;
 }
 
-.terminal-line span.success { color: #fff; font-weight: bold; }
-.terminal-line span.command { color: #fff; text-decoration: underline; }
-
-.glitch-wrapper {
-    margin-top: 4rem;
-    display: none;
-    text-align: left; /* Align ASCII to left */
+.terminal-line .status-ok {
+    color: var(--accent-color);
+    margin-right: 1rem;
 }
 
-.ascii-art {
-    font-size: 0.65rem;
-    line-height: 1;
-    color: #fff;
-    animation: glitch-text 0.15s infinite;
-}
-
-@keyframes glitch-text {
-    0% { transform: translate(0); }
-    10% { transform: translate(-1px, 1px); clip-path: inset(0 0 0 0); }
-    20% { transform: translate(-1px, -1px); clip-path: inset(10% 0 20% 0); }
-    30% { transform: translate(1px, 1px); clip-path: inset(30% 0 50% 0); }
-    40% { transform: translate(1px, -1px); clip-path: inset(0 0 0 0); }
-    100% { transform: translate(0); }
-}
-
-.os-name {
-    margin-top: 1.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 8px;
-    opacity: 0.7;
-    text-transform: uppercase;
+.terminal-line .highlight {
+    color: var(--accent-color);
 }
 
 /* Custom Scrollbar */

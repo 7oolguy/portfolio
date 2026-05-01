@@ -2,16 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. Preloader Terminal Logic
     const loader = document.getElementById('loader');
     const terminalLines = document.getElementById('terminal-lines');
-    const asciiContainer = document.getElementById('ascii-container');
     
     const bootLines = [
-        "> INITIALIZING KERNEL...",
-        "> LOADING SYSTEMS MODULES... <span class='success'>DONE</span>",
-        "> CHECKING SECURITY PROTOCOLS... <span class='success'>SAFE</span>",
-        "> ESTABLISHING MULTI-TENANT HANDSHAKE... <span class='success'>READY</span>",
-        "> MOUNTING DATA ARCHITECTURE... <span class='success'>SUCCESS</span>",
-        "> SYNCING REPOS... <span class='success'>COMPLETE</span>",
-        "> LAUNCHING <span class='command'>YAN_OS_v1.0.4</span>..."
+        "<span class='status-ok'>[  OK  ]</span> Started Show Initial Boot Message.",
+        "<span class='status-ok'>[  OK  ]</span> Reached target Local File Systems.",
+        "<span class='status-ok'>[  OK  ]</span> Started Load Kernel Modules.",
+        "<span class='status-ok'>[  OK  ]</span> Reached target Network.",
+        "<span class='status-ok'>[  OK  ]</span> Started Security Auditing Service.",
+        "<span class='status-ok'>[  OK  ]</span> Reached target System Initialization.",
+        "<span class='status-ok'>[  OK  ]</span> Started Multi-Tenant Database Engine.",
+        "<span class='status-ok'>[  OK  ]</span> Reached target Multi-User System.",
+        "<span class='status-ok'>[  OK  ]</span> Started <span class='highlight'>Yan Portfolio Services</span>.",
+        "Boot complete. Starting UI..."
     ];
 
     let lineIndex = 0;
@@ -22,23 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
             line.innerHTML = bootLines[lineIndex];
             terminalLines.appendChild(line);
             lineIndex++;
-            setTimeout(typeLine, Math.random() * 200 + 100);
+            setTimeout(typeLine, Math.random() * 150 + 50);
         } else {
-            // Show ASCII
+            // Final Exit
             setTimeout(() => {
-                terminalLines.style.display = 'none';
-                asciiContainer.style.display = 'block';
-                
-                // Final Exit
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
                 setTimeout(() => {
-                    loader.style.opacity = '0';
-                    loader.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        lenis.start(); // Start scroll only after boot
-                    }, 800);
-                }, 1500);
-            }, 500);
+                    loader.style.display = 'none';
+                    lenis.start(); // Start scroll only after boot
+                }, 600);
+            }, 1000);
         }
     };
 
