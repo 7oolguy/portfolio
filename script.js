@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLang = currentLang === 'en' ? 'pt' : 'en';
         localStorage.setItem('lang', currentLang);
         updateLanguage();
+        notifySys(`LOADING LANGUAGE PKG: ${currentLang.toUpperCase()}... OK`);
     });
 
     // 3. Dynamic Greeting
