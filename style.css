@@ -971,16 +971,20 @@ html, body {
     /* Modal Fixes */
     .modal-content {
         width: 95%;
-        max-height: 90vh;
+        max-height: 85vh;
         margin: 5vh auto;
         overflow-y: auto;
-        display: flex;
-        flex-direction: column;
+        display: block; /* explicitly reset to block to allow full scroll */
     }
     
     .modal-image {
         height: 200px;
-        flex-shrink: 0;
+        width: 100%;
+        display: block;
+    }
+
+    .modal-body {
+        display: block; /* Remove grid to avoid implicit height calculation issues */
     }
 
     .modal-text {
@@ -991,14 +995,20 @@ html, body {
         font-size: 1.5rem;
     }
 
+    .modal-description {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+    }
+
     .modal-close {
+        position: absolute;
         top: 10px;
         right: 10px;
         background: var(--bg-color);
         color: var(--text-primary);
         border: 2px solid var(--border-color);
         border-radius: 50%;
-        padding: 8px;
+        padding: 0;
         width: 35px;
         height: 35px;
         display: flex;
