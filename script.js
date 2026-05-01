@@ -159,52 +159,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Refined Custom Cursor with Trailing Effect
     const cursorDot = document.getElementById('cursor-dot');
     const cursorOutline = document.getElementById('cursor-outline');
-    
-    let cursorX = 0;
-    let cursorY = 0;
-    let outlineX = 0;
-    let outlineY = 0;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    window.addEventListener('mousemove', (e) => {
-        cursorX = e.clientX;
-        cursorY = e.clientY;
-        
-        // Immediate position for dot
-        cursorDot.style.left = cursorX + 'px';
-        cursorDot.style.top = cursorY + 'px';
-        cursorDot.style.transform = 'translate(-50%, -50%)';
-    });
+    if (!isTouchDevice) {
+        let cursorX = 0;
+        let cursorY = 0;
+        let outlineX = 0;
+        let outlineY = 0;
 
-    // Animate outline with trailing (lerp)
-    const animateCursor = () => {
-        const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
-        
-        outlineX = lerp(outlineX, cursorX, 0.15);
-        outlineY = lerp(outlineY, cursorY, 0.15);
-        
-        cursorOutline.style.left = outlineX + 'px';
-        cursorOutline.style.top = outlineY + 'px';
-        cursorOutline.style.transform = 'translate(-50%, -50%)';
-        
-        requestAnimationFrame(animateCursor);
-    };
-    animateCursor();
-
-    // Cursor hover effects
-    const interactiveElements = document.querySelectorAll('a, button, .project-card');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            cursorOutline.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-            if(body.classList.contains('dark-mode')) {
-                cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
+        window.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            
+            // Immediate position for dot
+            cursorDot.style.left = cursorX + 'px';
+            cursorDot.style.top = cursorY + 'px';
+            cursorDot.style.transform = 'translate(-50%, -50%)';
         });
-        el.addEventListener('mouseleave', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorOutline.style.backgroundColor = 'transparent';
+
+        // Animate outline with trailing (lerp)
+        const animateCursor = () => {
+            const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
+            
+            outlineX = lerp(outlineX, cursorX, 0.15);
+            outlineY = lerp(outlineY, cursorY, 0.15);
+            
+            cursorOutline.style.left = outlineX + 'px';
+            cursorOutline.style.top = outlineY + 'px';
+            cursorOutline.style.transform = 'translate(-50%, -50%)';
+            
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        // Cursor hover effects
+        const interactiveElements = document.querySelectorAll('a, button, .project-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorOutline.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+                if(body.classList.contains('dark-mode')) {
+                    cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
         });
-    });
+    } else {
+        // Remove cursor elements on touch devices
+        if (cursorDot) cursorDot.remove();
+        if (cursorOutline) cursorOutline.remove();
+    }
 
     // 5. Reveal Sections on Scroll (Intersection Observer)
     const observerOptions = {

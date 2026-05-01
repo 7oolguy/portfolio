@@ -839,8 +839,90 @@ body.dark-mode .modal {
     line-height: 1.8;
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .contact-box h2 {
+        font-size: 3rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    
+    nav {
+        padding: 1.5rem 0;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-box {
+        padding: 4rem 2rem;
+    }
+    
+    .contact-box h2 {
+        font-size: 2.5rem;
+    }
+    
+    .contact-email {
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
     .modal-text {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1rem;
+    }
+
+    /* Hide custom cursor on mobile */
+    .cursor-dot, .cursor-outline {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    
+    .cta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links {
+        display: none; /* Hide links on very small screens or implement hamburger */
+    }
+
+    .logo {
+        font-size: 0.7rem;
     }
 }
