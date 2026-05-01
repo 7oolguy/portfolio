@@ -109,6 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Theme Toggle Logic
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
+    const notifications = document.getElementById('terminal-notifications');
+
+    const notifySys = (msg) => {
+        const line = document.createElement('div');
+        line.className = 'notification-line';
+        line.innerHTML = `[ SYS ] ${msg}`;
+        notifications.appendChild(line);
+        setTimeout(() => line.remove(), 3000);
+    };
 
     // Check for saved theme or default to light
     const savedTheme = localStorage.getItem('theme');
@@ -120,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.toggle('dark-mode');
         const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
         localStorage.setItem('theme', theme);
+        notifySys(`SWITCHING THEME TO ${theme.toUpperCase()}... SUCCESS`);
     });
 
     // 2. Language Toggle Logic
