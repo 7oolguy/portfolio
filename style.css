@@ -461,6 +461,72 @@ h1 {
 }
 
 /* Contact box for light mode */
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.mouse {
+    width: 20px;
+    height: 35px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 20px;
+    position: relative;
+}
+
+.mouse::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 2px;
+    height: 6px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+    animation: mouse-scroll 2s infinite;
+}
+
+@keyframes mouse-scroll {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+.arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arrow span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-bottom: 1px solid var(--text-secondary);
+    border-right: 1px solid var(--text-secondary);
+    transform: rotate(45deg);
+    margin: -4px;
+    animation: arrow-bounce 2s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes arrow-bounce {
+    0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
+}
+
 .contact {
     padding: 10rem 0;
 }

@@ -224,13 +224,22 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(section);
     });
 
-    // 4. Smooth Parallax-like effect for Hero
+    // 6. Smooth Parallax-like effect for Hero & Hide Scroll Indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const heroContent = document.querySelector('.hero-content');
+        
         if (heroContent) {
             heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
             heroContent.style.opacity = 1 - (scrolled / 700);
+        }
+
+        if (scrollIndicator) {
+            scrollIndicator.style.opacity = 0.6 - (scrolled / 300);
+            if (scrolled > 300) {
+                scrollIndicator.style.pointerEvents = 'none';
+            }
         }
     });
 
