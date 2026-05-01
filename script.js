@@ -3,36 +3,81 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     const terminalLines = document.getElementById('terminal-lines');
     
-    const bootLines = [
-        "<span class='status-ok'>[  OK  ]</span> Started Show Initial Boot Message.",
-        "<span class='status-ok'>[  OK  ]</span> Reached target Local File Systems.",
-        "<span class='status-ok'>[  OK  ]</span> Started Load Kernel Modules.",
-        "<span class='status-ok'>[  OK  ]</span> Reached target Network.",
-        "<span class='status-ok'>[  OK  ]</span> Started Security Auditing Service.",
-        "<span class='status-ok'>[  OK  ]</span> Reached target System Initialization.",
-        "<span class='status-ok'>[  OK  ]</span> Started Multi-Tenant Database Engine.",
-        "<span class='status-ok'>[  OK  ]</span> Reached target Multi-User System.",
-        "<span class='status-ok'>[  OK  ]</span> Started <span class='highlight'>Yan Portfolio Services</span>.",
-        "Boot complete. Starting UI..."
+    const bootLogs = [
+        "[  OK  ] Finished Load Kernel Modules.",
+        "[  OK  ] Started Remount Root and Crypto File Systems.",
+        "[  OK  ] Reached target Local File Systems (Pre).",
+        "[  OK  ] Started Create Static Device Nodes in /dev.",
+        "[  OK  ] Reached target Local File Systems.",
+        "[  OK  ] Started udev Kernel Device Manager.",
+        "[  OK  ] Started Dispatch Password Requests to Console Directory Watch.",
+        "[  OK  ] Reached target Local System Services.",
+        "[  OK  ] Started Network Service Proxy.",
+        "[  OK  ] Started Create Volatile Files and Directories.",
+        "[  OK  ] Started Network Name Resolution.",
+        "[  OK  ] Reached target Network.",
+        "[  OK  ] Started Security Auditing Service.",
+        "[  OK  ] Reached target System Initialization.",
+        "[  OK  ] Started Daily Cleanup of Temporary Directories.",
+        "[  OK  ] Reached target Timers.",
+        "[  OK  ] Started Multi-User System.",
+        "[  OK  ] Started Login Service.",
+        "[  OK  ] Started Serial Getty on ttyS0.",
+        "[  OK  ] Started Set console font and keymap.",
+        "[  OK  ] Reached target Paths.",
+        "[  OK  ] Started Update UTMP about System Boot/Shutdown.",
+        "[  OK  ] Reached target Multi-User System.",
+        "[  OK  ] Started System Logging Service.",
+        "[  OK  ] Started LSB: Record System Boot/Shutdown in /var/log/wtmp.",
+        "[  OK  ] Started Multi-Tenant Database Engine.",
+        "[  OK  ] Started Data Persistence Layer.",
+        "[  OK  ] Started High Availability Load Balancer.",
+        "[  OK  ] Started API Security Middleware.",
+        "[  OK  ] Started Yan Portfolio Core Services.",
+        "Detecting hardware architecture...",
+        "CPU: 64-bit Virtual Processor (Yan-vCPU)",
+        "Memory: 16384 MB RAM (Optimized)",
+        "Storage: 512 GB NVMe SSD (Encrypted)",
+        "Initializing High-Performance UI...",
+        "Loading Localization Modules (EN/PT-BR)... DONE",
+        "Setting up Smooth Inertial Scroll (Lenis)... DONE",
+        "Activating Dual-Part Trailing Cursor... DONE",
+        "Finalizing environment variables...",
+        "Boot complete. Starting Yan Portfolio v1.0.4..."
     ];
 
-    let lineIndex = 0;
-    const typeLine = () => {
-        if (lineIndex < bootLines.length) {
+    let logIndex = 0;
+    const typeLogs = () => {
+        if (logIndex < bootLogs.length) {
             const line = document.createElement('div');
             line.className = 'terminal-line';
-            line.innerHTML = bootLines[lineIndex];
+            
+            // Format [ OK ] specifically
+            const text = bootLogs[logIndex];
+            if (text.startsWith("[  OK  ]")) {
+                line.innerHTML = `<span class='status-ok'>[  OK  ]</span> ${text.substring(8)}`;
+            } else {
+                line.textContent = text;
+            }
+            
             terminalLines.appendChild(line);
-            lineIndex++;
-            setTimeout(typeLine, Math.random() * 150 + 50);
+            logIndex++;
+            
+            // Auto-scroll to bottom
+            window.scrollTo(0, document.body.scrollHeight);
+            
+            // Vary speed for realism
+            let delay = Math.random() * 80 + 20;
+            if (logIndex > 25) delay = Math.random() * 40 + 10; // Speed up mid-way
+            
+            setTimeout(typeLogs, delay);
         } else {
-            // Final Exit
             setTimeout(() => {
                 loader.style.opacity = '0';
-                loader.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                loader.style.transition = 'opacity 0.6s ease-in-out';
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    lenis.start(); // Start scroll only after boot
+                    lenis.start();
                 }, 600);
             }, 1000);
         }
